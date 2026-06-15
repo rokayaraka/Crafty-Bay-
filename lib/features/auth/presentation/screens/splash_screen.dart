@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
 
+
+import '../../../shared/presentation/widgets/theme_toggle.dart';
 import '../widgets/appLogo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,11 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Spacer(),
+          themeToggleButton(),
           Center(child: appLogo()),
           Spacer(),
           CircularProgressIndicator(),
@@ -32,3 +36,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
