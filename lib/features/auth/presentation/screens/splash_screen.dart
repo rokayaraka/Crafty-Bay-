@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Spacer(),
           CircularProgressIndicator(),
           SizedBox(height: 20),
-          Text('version 1.0.0'),
+          Text('${AppLocalizations.of(context)!.version} 1.0.0'),
          const SizedBox(height: 20),
         ],
       ),
