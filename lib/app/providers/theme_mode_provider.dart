@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeModeProvider extends ChangeNotifier {
-  ThemeMode _currentThemeMode = .system;
+  ThemeMode _currentThemeMode = .light;
 
   ThemeMode get themeMode => _currentThemeMode;
 
