@@ -1,8 +1,10 @@
+
 import 'package:flutter/material.dart';
 
 import '../../../../app/extensions/localization_extension.dart';
 import '../../../shared/presentation/utility/validators.dart';
 import '../widgets/appLogo.dart';
+import 'verify_otp_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -141,9 +143,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onTapSignUpButton() {
-     if (_formkey.currentState!.validate()) {
-      //TODO: call signUp Api
-    }
+    //  if (_formkey.currentState!.validate()) {
+    //   //TODO: call signUp Api
+    // }
+    Navigator.pushNamed(context, VerifyOTPScreen.name);
   }
 
   @override
