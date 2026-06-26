@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/features/shared/presentation/presentation/main_nav_holder_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/sign_in_screen.dart';
@@ -19,6 +20,8 @@ class AppRoutes{
       widget = SignUpScreen();
       case VerifyOTPScreen.name:
       widget = VerifyOTPScreen();
+      case MainNavHolderScreen.name:
+      widget  = MainNavHolderScreen();
 
     }
 

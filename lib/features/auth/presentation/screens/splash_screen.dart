@@ -1,5 +1,6 @@
 
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:crafty_bay/features/shared/presentation/presentation/main_nav_holder_screen.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ void initState() {
 }
   void _navigateToNextScreen()async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, SignInScreen.name);
+    Navigator.pushReplacementNamed(context, MainNavHolderScreen.name);
   }
   @override
   Widget build(BuildContext context) {
