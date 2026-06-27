@@ -1,10 +1,11 @@
 
-import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
-import 'package:crafty_bay/features/shared/presentation/presentation/main_nav_holder_screen.dart';
-import 'package:crafty_bay/l10n/app_localizations.dart';
+
+
 import 'package:flutter/material.dart';
 
 
+import '../../../../l10n/app_localizations.dart';
+import '../../../shared/presentation/presentation/main_nav_holder_screen.dart';
 import '../../../shared/presentation/widgets/theme_toggle.dart';
 import '../widgets/appLogo.dart';
 
@@ -26,7 +27,7 @@ void initState() {
 }
   void _navigateToNextScreen()async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushReplacementNamed(context, MainNavHolderScreen.name);
+    Navigator.pushNamedAndRemoveUntil(context, MainNavHolderScreen.name,(predicate)=>false);
   }
   @override
   Widget build(BuildContext context) {

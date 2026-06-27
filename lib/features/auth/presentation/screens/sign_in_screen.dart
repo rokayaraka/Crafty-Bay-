@@ -1,9 +1,10 @@
-import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../app/extensions/localization_extension.dart';
 import '../../../shared/presentation/utility/validators.dart';
 import '../widgets/appLogo.dart';
+import 'sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
