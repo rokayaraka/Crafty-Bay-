@@ -9,4 +9,9 @@ class MainNavHolderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void backToHome()
+  {
+    changeIndex(0);
+  }
+
 }

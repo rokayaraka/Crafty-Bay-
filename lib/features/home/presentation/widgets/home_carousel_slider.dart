@@ -19,10 +19,13 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
       spacing: 8,
       children: [
         CarouselSlider(
-          options: CarouselOptions(height: 180.0, viewportFraction: 1,
-          onPageChanged: (index, _) {
-            _selectedIndex.value=index;
-          },
+          options: CarouselOptions(
+            height: 180.0,
+            viewportFraction: 1,
+            autoPlay: true,
+            onPageChanged: (index, _) {
+              _selectedIndex.value = index;
+            },
           ),
           items: [1, 2, 3, 4, 5].map((i) {
             return Builder(
@@ -41,7 +44,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
 
         ValueListenableBuilder(
           valueListenable: _selectedIndex,
-          builder: (context,index,_) {
+          builder: (context, index, _) {
             return Row(
               mainAxisAlignment: .center,
               children: [
@@ -53,12 +56,14 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                     decoration: BoxDecoration(
                       borderRadius: .circular(10),
 
-                      color:i==index?  AppColors.themeColor :Colors.grey.shade300,
+                      color: i == index
+                          ? AppColors.themeColor
+                          : Colors.grey.shade300,
                     ),
                   ),
               ],
             );
-          }
+          },
         ),
       ],
     );

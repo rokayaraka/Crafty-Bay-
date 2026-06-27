@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_carousel_slider.dart';
+import '../widgets/home_category_section.dart';
 import '../widgets/product_search_bar.dart';
+import '../widgets/section_header.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,8 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ProductSearchBar(),
               HomeCarouselSlider(),
-
-            ],
+              SectionHeader(headerText: 'Category', onTapSeeAll: () {}),
+              HomeCategorySection(),
+    ],
           ),
         ),
       ),
