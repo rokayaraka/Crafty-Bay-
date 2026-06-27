@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../shared/presentation/presentation/providers/main_nav_holder_provider.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_carousel_slider.dart';
 import '../widgets/home_category_section.dart';
@@ -26,7 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ProductSearchBar(),
               HomeCarouselSlider(),
-              SectionHeader(headerText: 'Category', onTapSeeAll: () {}),
+              SectionHeader(headerText: 'Category', onTapSeeAll: () {
+                 context.read<MainNavHolderProvider>().navigateToCategory();
+              }),
               HomeCategorySection(),
     ],
           ),

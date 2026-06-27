@@ -13,5 +13,8 @@ class MainNavHolderProvider extends ChangeNotifier {
   {
     changeIndex(0);
   }
-
+ void navigateToCategory()
+  {
+    changeIndex(1);
+  }
 }
