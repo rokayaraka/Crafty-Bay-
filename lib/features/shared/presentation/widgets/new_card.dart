@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/app_colors.dart';
 import '../../../../app/asset_paths.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+class NewCard extends StatelessWidget {
+  const NewCard({super.key});
 
   @override
   Widget build(BuildContext context) {
