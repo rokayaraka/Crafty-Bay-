@@ -1,4 +1,6 @@
-
+import 'package:crafty_bay/app/app_colors.dart';
+import 'package:crafty_bay/app/asset_paths.dart';
+import 'package:crafty_bay/features/shared/presentation/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,11 +31,28 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ProductSearchBar(),
               HomeCarouselSlider(),
-              SectionHeader(headerText: 'Category', onTapSeeAll: () {
-                 context.read<MainNavHolderProvider>().navigateToCategory();
-              }),
+              SectionHeader(
+                headerText: 'Category',
+                onTapSeeAll: () {
+                  context.read<MainNavHolderProvider>().navigateToCategory();
+                },
+              ),
               HomeCategorySection(),
-    ],
+              SectionHeader(
+                headerText: 'Popular',
+                onTapSeeAll: () {
+                  context.read<MainNavHolderProvider>().navigateToCategory();
+                },
+              ),
+
+              SingleChildScrollView(
+                scrollDirection: .horizontal,
+                child: Row(
+                  children: [1,2,3,4,5].map((e)=>ProductCard()).toList(),
+                ),
+              ),
+
+ ],
           ),
         ),
       ),
