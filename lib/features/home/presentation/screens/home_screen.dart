@@ -1,8 +1,9 @@
-import 'package:crafty_bay/features/shared/presentation/widgets/new_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/presentation/presentation/providers/main_nav_holder_provider.dart';
+import '../../../shared/presentation/widgets/new_card.dart';
 import '../../../shared/presentation/widgets/product_card.dart';
 import '../../../shared/presentation/widgets/special_card.dart';
 import '../widgets/home_app_bar.dart';
