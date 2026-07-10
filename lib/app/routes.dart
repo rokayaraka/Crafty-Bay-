@@ -22,6 +22,8 @@ class AppRoutes {
         widget = VerifyOTPScreen();
       case MainNavHolderScreen.name:
         widget = MainNavHolderScreen();
+        break;
+
       case ProductLisyByCategory.name:
         Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
 

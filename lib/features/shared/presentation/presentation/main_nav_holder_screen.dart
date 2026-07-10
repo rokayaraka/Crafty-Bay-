@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../wishList/presentation/screens/wish_list_screen.dart';
 import '../../../Category/presentation/screens/category_screen.dart';
 import '../../../home/presentation/screens/home_screen.dart';
+import '../../../carts/presentation/screens/cart_screen.dart';
 import 'providers/main_nav_holder_provider.dart';
 
 class MainNavHolderScreen extends StatefulWidget {
@@ -20,8 +22,9 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     CategoryScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    
+    CartScreen(),
+    WishListScreen(),
   ];
 
   @override
@@ -50,7 +53,7 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
                 label: 'Carts',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline),
+                icon: Icon(Icons.favorite_border_outlined),
                 label: 'Wishlist',
               ),
             ],
