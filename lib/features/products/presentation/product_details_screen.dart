@@ -1,11 +1,13 @@
-import 'package:crafty_bay/features/products/presentation/widgets/color_picker.dart';
-import 'package:crafty_bay/features/products/presentation/widgets/price_and_add_to_cart_section.dart';
-import 'package:crafty_bay/features/products/presentation/widgets/size_picker.dart';
-import 'package:crafty_bay/features/shared/presentation/widgets/inc_dec_button.dart';
+
+import 'package:crafty_bay/features/review/presentation/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/app_colors.dart';
+import '../../shared/presentation/widgets/inc_dec_button.dart';
+import 'widgets/color_picker.dart';
+import 'widgets/price_and_add_to_cart_section.dart';
 import 'widgets/product_image_carosol.dart';
+import 'widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.productId});
@@ -69,7 +71,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 Text('4.5'),
                               ],
                             ),
-                            TextButton(onPressed: () {}, child: Text('Reviews')),
+                            TextButton(onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewScreen()));
+                            }, child: Text('Reviews')),
                             Container(
                               padding: .all(4),
                               decoration: BoxDecoration(
