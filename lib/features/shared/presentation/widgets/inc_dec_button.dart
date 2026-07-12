@@ -61,7 +61,7 @@ class _IncDecButtonState extends State<IncDecButton> {
           color: AppColors.themeColor,
           borderRadius: .circular(4),
         ),
-        child: Center(child: Icon(icon, color: Colors.white,size: 15,)),
+        child: Center(child: Icon(icon, color: Colors.white,size: 13,)),
       ),
     );
   }

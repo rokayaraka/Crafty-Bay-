@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../shared/presentation/presentation/providers/main_nav_holder_provider.dart';
 import '../widgets/cart_item.dart';
 import '../widgets/total_price_and_checkout_section.dart';

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../app/app_colors.dart';
 import '../../../../app/constants.dart';
 
-class TotalPriceAndCheckoutSection extends StatelessWidget {
-  const TotalPriceAndCheckoutSection({
+class PriceAndAddToCartSection extends StatelessWidget {
+  const PriceAndAddToCartSection({
     super.key,
   });
 
@@ -25,7 +25,7 @@ class TotalPriceAndCheckoutSection extends StatelessWidget {
           Column(
             crossAxisAlignment: .start,
             children: [
-              Text('Total price',
+              Text('Price',
               style: TextStyle(
                 fontWeight: .bold
               ),
@@ -45,7 +45,7 @@ class TotalPriceAndCheckoutSection extends StatelessWidget {
             child: FilledButton(
               
               onPressed: (){},
-               child: Text('Checkout')),
+               child: Text('Add to Cart')),
           ),
         ],
       ),
