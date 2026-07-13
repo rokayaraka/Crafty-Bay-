@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 
 class OtpTimerProvider extends ChangeNotifier {
@@ -11,7 +10,7 @@ static const int _secondsForResendOTP = 30;
 
 
   int get secondsLeft=>_secondsLeft;
-  void startTimer(){
+  Future<void> startTimer() async {
     _timer?.cancel(); 
     _secondsLeft=_secondsForResendOTP;
 
@@ -25,11 +24,11 @@ static const int _secondsForResendOTP = 30;
       }
       notifyListeners();
     });
+   
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _timer?.cancel();
     super.dispose();
   }

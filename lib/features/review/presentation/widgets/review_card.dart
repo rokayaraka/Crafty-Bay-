@@ -17,8 +17,10 @@ class ReviewCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           children: [
+             const SizedBox(height: 12,),
             Row(
               children: [
+                        
                 CircleIconButton(icon: Icons.person, onTap: () {}),
                 const SizedBox(width: 12,),
                 Text('Rokaya Raka',
@@ -26,10 +28,11 @@ class ReviewCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12,),
+            const SizedBox(height: 10,),
             Text(''' The shoe is cushioned in a way that makes me want to do all my long runs in them. It doesn’t drag as some cushioned shoes do, but feels responsive,” she said.''',
              style: TextStyle(fontSize: 14,color: Colors.grey),
             ),
+                const SizedBox(height: 12,),
           ],
         ),
       ),

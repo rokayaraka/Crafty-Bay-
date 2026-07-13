@@ -26,12 +26,14 @@ class _ReviewScreenState extends State<ReviewScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 5,
+              itemCount: 4,
+
               itemBuilder: (context, index) {
                 return ReviewCard();
               },
             ),
           ),
+          const SizedBox(height: 20),
           AddReviewSection(),
         ],
       ),
