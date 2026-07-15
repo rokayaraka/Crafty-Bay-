@@ -48,7 +48,6 @@ class NetworkCaller {
       );
     }
   }
-
   ///POST///
   Future<NetWorkResponse> postRequest(
     String url,
@@ -76,7 +75,7 @@ class NetworkCaller {
         return NetWorkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          errorMsg: decodedJson['massage'] ?? 'something went wrong',
+          errorMsg: decodedJson['msg'] ?? 'something went wrong',
         );
       }
     } on Exception catch (e) {

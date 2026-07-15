@@ -1,6 +1,7 @@
 
 
 
+import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -27,7 +28,7 @@ void initState() {
 }
   void _navigateToNextScreen()async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushNamedAndRemoveUntil(context, MainNavHolderScreen.name,(predicate)=>false);
+    Navigator.pushNamedAndRemoveUntil(context, SignUpScreen.name,(predicate)=>false);
   }
   @override
   Widget build(BuildContext context) {

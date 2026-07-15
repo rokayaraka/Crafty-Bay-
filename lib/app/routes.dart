@@ -1,4 +1,3 @@
-import 'package:crafty_bay/features/products/presentation/product_details_screen.dart';
 import 'package:crafty_bay/features/products/presentation/screens/product_lisy_by_category.dart';
 import 'package:crafty_bay/features/shared/presentation/presentation/main_nav_holder_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +22,6 @@ class AppRoutes {
         widget = VerifyOTPScreen();
       case MainNavHolderScreen.name:
         widget = MainNavHolderScreen();
-        break;
-
       case ProductLisyByCategory.name:
         Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
 
@@ -32,11 +29,6 @@ class AppRoutes {
           categoryId: args['categoryId'],
           categoryName: args['categoryName'],
         );
-
-        case ProductDetailsScreen.name:
-        final String productId=settings.arguments as String;
-        widget = ProductDetailsScreen(productId: productId);
-
     }
 
     return MaterialPageRoute(builder: (context) => widget);

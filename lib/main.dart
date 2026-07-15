@@ -13,11 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 //-----Coding part------
 
-
 //ETC- Easy to Change
 //SOC ->Seperation of concern
-
-
 
 //set up Firebase
 //Craslytics
@@ -25,29 +22,23 @@ import 'package:firebase_core/firebase_core.dart';
 //Project Structure -> MVVM, Clean Architecture, onion,MVP
 
 //Layer first architecture/Structure
-//Feature First 
+//Feature First
 
 //themeing
 //navigation- Named Navigation
 
-
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
- FlutterError.onError = (errorDetails) {
-      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    };
-    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
-
-  
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   runApp(const CraftyBayApp());
 }
-

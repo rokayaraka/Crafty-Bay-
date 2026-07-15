@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalProvider extends ChangeNotifier {
-  Locale _currentLocal = Locale('bn');
+  Locale _currentLocal = Locale('en');
 
   final List<Locale> _locals = [Locale('en'), Locale('bn')];
 
