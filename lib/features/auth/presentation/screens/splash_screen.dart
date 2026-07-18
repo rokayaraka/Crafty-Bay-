@@ -1,14 +1,9 @@
 
-
-
-import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-
-
 import '../../../../l10n/app_localizations.dart';
-import '../../../shared/presentation/presentation/main_nav_holder_screen.dart';
 import '../../../shared/presentation/widgets/theme_toggle.dart';
 import '../widgets/appLogo.dart';
+import 'sign_up_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

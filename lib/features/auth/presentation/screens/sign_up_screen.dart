@@ -26,7 +26,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passTEController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
   final SignUpProvider _signUpProvider = SignUpProvider();
 
   bool _enableButton = false;
@@ -198,7 +197,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     final bool isSuccess = await _signUpProvider.signUp(params);
     if (isSuccess) {
-      Navigator.pushNamed(context, VerifyOTPScreen.name);
+      Navigator.pushNamed(
+        context,
+        VerifyOTPScreen.name,
+        arguments: _emailTEController.text.trim(),
+      );
     } else {
       showSnackBarMessage(context, _signUpProvider.errorMessage!);
     }

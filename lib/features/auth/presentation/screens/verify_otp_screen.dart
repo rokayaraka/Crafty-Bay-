@@ -1,25 +1,29 @@
-
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import '../../../../app/app_colors.dart';
+import '../../../shared/presentation/widgets/centered_progress_indicator.dart';
+import '../../../shared/presentation/widgets/snack_bar_message.dart';
+import '../../data/models/verify_otp_params.dart';
 import '../providers/otp_timer_provider.dart';
+import '../providers/verify_otp_provider.dart';
 import '../widgets/appLogo.dart';
 
 class VerifyOTPScreen extends StatefulWidget {
-  const VerifyOTPScreen({super.key});
+  const VerifyOTPScreen({super.key, required this.email});
   static const String name = '/verify-otp';
 
+  final String email;
   @override
   State<VerifyOTPScreen> createState() => _VerifyOTPScreenState();
 }
 
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
+  // ignore: non_constant_identifier_names
   final PinInputController _OtpTEController = PinInputController();
-
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final OtpTimerProvider _otpTimerProvider = OtpTimerProvider();
-
+  final VerifyOtpProvider _verifyOtpProvider = VerifyOtpProvider();
   @override
   void initState() {
     super.initState();
@@ -31,8 +35,11 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
-    return ChangeNotifierProvider.value(
-      value: _otpTimerProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: _otpTimerProvider),
+        ChangeNotifierProvider.value(value: _verifyOtpProvider),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -47,7 +54,6 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     const SizedBox(height: 80),
                     appLogo(width: 100),
                     const SizedBox(height: 20),
-
                     Text('Verify Your OTP ', style: textTheme.titleLarge),
                     SizedBox(height: 6),
                     Text(
@@ -66,13 +72,18 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         completeFillColor: AppColors.themeColor,
                       ),
                     ),
-
                     SizedBox(height: 20),
-                    FilledButton(
-                      onPressed: _onTapSignInButton,
-                      child: Text('Verify OTP'),
+                    Consumer<VerifyOtpProvider>(
+                      builder: (context, _, _) {
+                        if (_verifyOtpProvider.verifyOtpInProgress) {
+                          return CenteredProgressIndicator();
+                        }
+                        return FilledButton(
+                          onPressed: _onTapVerifyOtpButton,
+                          child: Text('Verify OTP'),
+                        );
+                      },
                     ),
-
                     const SizedBox(height: 16),
                     Consumer<OtpTimerProvider>(
                       builder: (context, _, _) {
@@ -87,7 +98,6 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                               style: TextStyle(color: Colors.black),
                               children: [
                                 TextSpan(text: 'Resend OTP After  '),
-
                                 TextSpan(
                                   text: ' ${_otpTimerProvider.secondsLeft}s',
                                   style: TextStyle(color: AppColors.themeColor),
@@ -108,14 +118,31 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
     );
   }
 
-  void _onTapSignInButton() {
+  void _onTapVerifyOtpButton() {
     if (_formkey.currentState!.validate()) {
-      //TODO: call signIn Api
+      _verifyOtp();
+    }
+  }
+
+  Future<void> _verifyOtp() async {
+    // Implement the logic to verify the OTP here
+    final bool isSuccess = await _verifyOtpProvider.verifyOtp(
+      VerifyOtpParams(otp: _OtpTEController.text, email: ''),
+    );
+
+    if (isSuccess) {
+      // Navigate to the next screen or show success message
+    } else {
+      // Show error message
+
+      showSnackBarMessage(context, _verifyOtpProvider.errorMessage!);
     }
   }
 
   void _onTapResendOtp() {
     _otpTimerProvider.startTimer();
+
+    //TODO: Resend Otp from api
   }
 
   @override

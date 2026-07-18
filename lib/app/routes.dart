@@ -19,7 +19,8 @@ class AppRoutes {
       case SignUpScreen.name:
         widget = SignUpScreen();
       case VerifyOTPScreen.name:
-        widget = VerifyOTPScreen();
+      final email = settings.arguments as String;
+        widget = VerifyOTPScreen(email: email);
       case MainNavHolderScreen.name:
         widget = MainNavHolderScreen();
       case ProductLisyByCategory.name:

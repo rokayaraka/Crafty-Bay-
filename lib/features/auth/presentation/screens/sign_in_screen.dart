@@ -1,8 +1,13 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/extensions/localization_extension.dart';
+import '../../../shared/presentation/presentation/main_nav_holder_screen.dart';
 import '../../../shared/presentation/utility/validators.dart';
+import '../../../shared/presentation/widgets/centered_progress_indicator.dart';
+import '../../../shared/presentation/widgets/snack_bar_message.dart';
+import '../../data/models/sign_in_params.dart';
+import '../providers/sign_in_provider.dart';
 import '../widgets/appLogo.dart';
 import 'sign_up_screen.dart';
 
@@ -16,69 +21,79 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailTEController = TextEditingController();
-
   final TextEditingController _passTEController = TextEditingController();
-
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final SignInProvider _signInProvider = SignInProvider();
+
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: _formkey,
-              autovalidateMode: .onUserInteraction,
-              onChanged: () {},
-              child: Column(
-                children: [
-                  const SizedBox(height: 80),
-                  appLogo(width: 100),
-                  const SizedBox(height: 20),
+    return ChangeNotifierProvider.value(
+      value: _signInProvider,
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Form(
+                key: _formkey,
+                autovalidateMode: .onUserInteraction,
+                onChanged: () {},
+                child: Column(
+                  children: [
+                    const SizedBox(height: 80),
+                    appLogo(width: 100),
+                    const SizedBox(height: 20),
 
-                  Text('Welcome Back', style: textTheme.titleLarge),
-                  SizedBox(height: 6),
-                  Text(
-                    'Sign In with your email and Password',
-                    style: textTheme.labelLarge,
-                  ),
-                  SizedBox(height: 20),
-                  TextFormField(
-                    controller: _emailTEController,
-                    textInputAction: .next,
-                    keyboardType: .emailAddress,
-                    decoration: InputDecoration(
-                      hintText: context.localization.email,
-                      labelText: context.localization.email,
+                    Text('Welcome Back', style: textTheme.titleLarge),
+                    SizedBox(height: 6),
+                    Text(
+                      'Sign In with your email and Password',
+                      style: textTheme.labelLarge,
                     ),
-                    validator: (String? value) =>
-                        Validators.validateEmail(value),
-                  ),
-                  SizedBox(height: 12),
-                  TextFormField(
-                    controller: _passTEController,
-                    obscureText: true,
-                    obscuringCharacter: "*",
-                    decoration: InputDecoration(
-                      hintText: context.localization.password,
-                      labelText: context.localization.password,
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: _emailTEController,
+                      textInputAction: .next,
+                      keyboardType: .emailAddress,
+                      decoration: InputDecoration(
+                        hintText: context.localization.email,
+                        labelText: context.localization.email,
+                      ),
+                      validator: (String? value) =>
+                          Validators.validateEmail(value),
                     ),
-                    validator: (input) => Validators.validatePassword(input),
-                  ),
-                  SizedBox(height: 20),
-                  FilledButton(
-                    onPressed: _onTapSignInButton,
-                    child: Text('Sign In'),
-                  ),
+                    SizedBox(height: 12),
+                    TextFormField(
+                      controller: _passTEController,
+                      obscureText: true,
+                      obscuringCharacter: "*",
+                      decoration: InputDecoration(
+                        hintText: context.localization.password,
+                        labelText: context.localization.password,
+                      ),
+                      validator: (input) => Validators.validatePassword(input),
+                    ),
+                    SizedBox(height: 20),
+                    Consumer<SignInProvider>(
+                      builder: (context, _, _) {
+                        if (_signInProvider.signInInProgress) {
+                          return CenteredProgressIndicator();
+                        }
+                        return FilledButton(
+                          onPressed: _onTapSignInButton,
+                          child: Text('Sign In'),
+                        );
+                      },
+                    ),
 
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: _onTapSignUpButton,
-                    child: Text("Don't have an account? Sign Up "),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: _onTapSignUpButton,
+                      child: Text("Don't have an account? Sign Up "),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -90,6 +105,29 @@ class _SignInScreenState extends State<SignInScreen> {
   void _onTapSignInButton() {
     if (_formkey.currentState!.validate()) {
       //TODO: call signIn Api
+      _signIn();
+    }
+  }
+
+  Future<void> _signIn() async {
+    SignInParams params = SignInParams(
+      email: _emailTEController.text.trim(),
+      password: _passTEController.text,
+    );
+    final bool isSuccess = await _signInProvider.signIn(params);
+    if (isSuccess) {
+      //TODO: navigate to the homescreen
+      if (mounted) {
+  Navigator.pushNamedAndRemoveUntil(
+    context,
+    MainNavHolderScreen.name,
+    (predicate) => false,
+  );
+}
+    } else {
+      if (mounted) {
+  showSnackBarMessage(context, _signInProvider.errorMessage!);
+}
     }
   }
 
