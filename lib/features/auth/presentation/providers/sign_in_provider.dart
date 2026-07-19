@@ -1,5 +1,6 @@
 import 'package:crafty_bay/app/get_network_caller.dart';
 import 'package:flutter/material.dart';
+import '../../../../app/providers/auth_controller.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
 import '../../data/models/sign_in_params.dart';
@@ -26,6 +27,9 @@ class SignInProvider extends ChangeNotifier {
       String token = response.body['data']['token'];
        UserModel userModel = UserModel.fromJson(response.body['data']['user']);
       //TODO: save token and user data in shared preferences
+      await AuthController.saveUserData(token, userModel);
+      
+
     } else {
       _errorMessage = response.errorMsg;
     }

@@ -1,12 +1,13 @@
 import '../core/service/network_caller/network_caller.dart';
+import 'providers/auth_controller.dart';
 
 NetworkCaller getNetworkCaller() {
-  return NetworkCaller(
-    headers: () => {
-      'content-type': 'application/json',
-      //'access token':'token'
-    },
-  );
+  Map<String, String> headers = {'content-type': 'application/json'};
+  if (AuthController.accessToken != null) {
+    headers['token'] = AuthController.accessToken!;
+  }
+
+  return NetworkCaller(headers: () => headers);
 }
 
 

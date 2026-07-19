@@ -22,4 +22,14 @@ factory UserModel.fromJson(Map<String, dynamic> json) {
       city: json['city'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'first_name': firstName,
+      'last_name': lastName,
+      'email': email,
+      'city': city,
+    };
+  }
 }
