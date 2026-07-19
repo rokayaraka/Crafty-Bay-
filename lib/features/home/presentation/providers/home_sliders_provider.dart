@@ -6,7 +6,6 @@ import '../../../../core/service/network_caller/network_caller.dart';
 import '../../data/models/slider_model.dart';
 
 class HomeSlidersProvider extends ChangeNotifier {
-
   bool _getSlidersInProgress = false;
   List<SliderModel> _sliders = [];
 
@@ -16,7 +15,7 @@ class HomeSlidersProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   Future<void> getSliders() async {
-          bool isSuccess = false;
+
     _getSlidersInProgress = true;
     notifyListeners();
 
