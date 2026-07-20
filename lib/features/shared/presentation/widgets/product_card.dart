@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/asset_paths.dart';
+import '../../../products/data/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  const ProductCard({super.key, required this.productModel});
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, ProductDetailsScreen.name,arguments: 'Product_ID');
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          ProductDetailsScreen.name,
+          arguments: productModel.id,
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: .circular(8)),
@@ -23,7 +30,7 @@ class ProductCard extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width: 150,
+                width: 120,
                 height: 120,
                 decoration: BoxDecoration(
                   color: AppColors.themeColor.withAlpha(30),
@@ -32,23 +39,25 @@ class ProductCard extends StatelessWidget {
                     topRight: .circular(8),
                   ),
                 ),
-                child: Image.asset(AssetPaths.dummyPng),
+                child: Image.network(getProductPhoto(productModel.photos),
+                errorBuilder: (_,_,_)=>Image.asset(AssetPaths.dummyPng),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  spacing: 4,
+                  spacing: 3,
                   crossAxisAlignment: .start,
                   children: [
                     Text(
-                      'Title of pruduct',
+                     productModel.title,
                       style: TextStyle(fontWeight: .w900, color: Colors.black),
                     ),
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Text(
-                          '\$100',
+                          '\$${productModel.price}',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: .w600,
@@ -59,7 +68,7 @@ class ProductCard extends StatelessWidget {
                           spacing: 4,
                           children: [
                             Icon(Icons.star, color: Colors.amber, size: 18),
-                            Text('4.5'),
+                            Text('${productModel.rating}?? 0'),
                           ],
                         ),
                         Container(
@@ -79,12 +88,21 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
               ),
-      
+
               const SizedBox(height: 4),
             ],
           ),
         ),
       ),
     );
+  }
+
+  //random placeholder image
+  String getProductPhoto(List<String> photos) {
+    if (photos.isEmpty) {
+      return '';
+    } else {
+      return photos.first;
+    }
   }
 }

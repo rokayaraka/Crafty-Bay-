@@ -1,8 +1,8 @@
 
-import 'package:crafty_bay/features/review/presentation/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/app_colors.dart';
+import '../../review/presentation/screens/review_screen.dart';
 import '../../shared/presentation/widgets/inc_dec_button.dart';
 import 'widgets/color_picker.dart';
 import 'widgets/price_and_add_to_cart_section.dart';

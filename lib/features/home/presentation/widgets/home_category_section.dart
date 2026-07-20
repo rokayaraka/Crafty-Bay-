@@ -1,8 +1,8 @@
-import 'package:crafty_bay/features/Category/data/models/category_model.dart';
-import 'package:crafty_bay/features/Category/presentation/providers/category_list_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Category/presentation/providers/category_list_provider.dart';
 import '../../../shared/presentation/widgets/category_card.dart';
 
 class HomeCategorySection extends StatelessWidget {
