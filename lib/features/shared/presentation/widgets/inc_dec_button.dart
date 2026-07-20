@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class IncDecButton extends StatefulWidget {
   const IncDecButton({
-    Key? key,
-    required this.maxcount,
-    required this.mincount,
+    super.key,
+    required this.maxCount,
+    required this.minCount,
     required this.initialValue,
     required this.onChange,
   });
 
-  final int maxcount;
-  final int mincount;
+  final int maxCount;
+  final int minCount;
   final int initialValue;
   final Function(int) onChange;
 
@@ -21,6 +21,7 @@ class IncDecButton extends StatefulWidget {
 
 class _IncDecButtonState extends State<IncDecButton> {
   int _counter = 0;
+
   @override
   void initState() {
     super.initState();
@@ -32,36 +33,36 @@ class _IncDecButtonState extends State<IncDecButton> {
     return Row(
       mainAxisAlignment: .spaceBetween,
       children: [
-        _IconButton(Icons.remove, () {
-          if (_counter > widget.mincount) {
+        _iconButton(Icons.remove, () {
+          if (_counter > widget.minCount) {
             _counter--;
             widget.onChange(_counter);
+            setState(() {});
           }
-          setState(() {});
-        }),
-        Text('$_counter',style: TextStyle(fontSize: 24),),
-        _IconButton(Icons.add, () {
-          if (_counter < widget.maxcount) {
+        }, _counter <= widget.minCount),
+
+        Text('$_counter', style: TextStyle(fontSize: 24)),
+        _iconButton(Icons.add, () {
+          if (_counter < widget.maxCount) {
             _counter++;
+            widget.onChange(_counter);
+            setState(() {});
           }
-          widget.onChange(_counter);
-          setState(() {});
-        }),
+        }, _counter >= widget.maxCount),
       ],
     );
   }
 
-  Widget _IconButton(IconData icon, VoidCallback onTap) {
+  Widget _iconButton(IconData icon, VoidCallback onTap, bool disable) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-  
-        padding: .all(10),
+        padding: .all(4),
         decoration: BoxDecoration(
-          color: AppColors.themeColor,
+          color: disable ? Colors.grey : AppColors.themeColor,
           borderRadius: .circular(4),
         ),
-        child: Center(child: Icon(icon, color: Colors.white,size: 13,)),
+        child: Icon(icon, color: Colors.white, size: 20),
       ),
     );
   }

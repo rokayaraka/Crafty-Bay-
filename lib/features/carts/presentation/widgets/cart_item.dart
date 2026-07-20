@@ -72,14 +72,14 @@ class CartItem extends StatelessWidget {
                   SizedBox(width: 70),
                   SizedBox(
                     width: 100,
-                    child: IncDecButton(
-                      maxcount: 20,
-                      mincount: 1,
-                      initialValue: 1,
-                      onChange: (int value) {
-                        print(value);
-                      },
-                    ),
+                    // child: IncDecButton(
+                    //   maxcount: 20,
+                    //   mincount: 1,
+                    //   initialValue: 1,
+                    //   onChange: (int value) {
+                    //     print(value);
+                    //   },
+                    // ),
                   ),
                 ],
               ),

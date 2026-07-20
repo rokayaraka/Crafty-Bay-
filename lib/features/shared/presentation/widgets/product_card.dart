@@ -1,9 +1,10 @@
-import 'package:crafty_bay/features/products/presentation/product_details_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/asset_paths.dart';
 import '../../../products/data/models/product_model.dart';
+import '../../../products/presentation/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.productModel});
@@ -17,7 +18,7 @@ class ProductCard extends StatelessWidget {
         Navigator.pushNamed(
           context,
           ProductDetailsScreen.name,
-          arguments: productModel.id,
+          arguments:productModel.id,
         );
       },
       child: Card(

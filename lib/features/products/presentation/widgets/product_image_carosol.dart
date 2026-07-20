@@ -1,49 +1,51 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:crafty_bay/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ProductImageCarosol extends StatefulWidget {
-  const ProductImageCarosol({super.key});
+import '../../../../app/app_colors.dart';
+
+class ProductImageCarousel extends StatefulWidget {
+  const ProductImageCarousel({super.key, required this.photos});
+
+  final List<String> photos;
 
   @override
-  State<ProductImageCarosol> createState() => _ProductImageCarosolState();
+  State<ProductImageCarousel> createState() => _ProductImageCarouselState();
 }
 
-class _ProductImageCarosolState extends State<ProductImageCarosol> {
-   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
+class _ProductImageCarouselState extends State<ProductImageCarousel> {
+  final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      
       children: [
         CarouselSlider(
           options: CarouselOptions(
             height: 220,
             viewportFraction: 1,
-            autoPlay: true,
             onPageChanged: (index, _) {
               _selectedIndex.value = index;
             },
           ),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.photos.map((photo) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 1.0),
-                  decoration: BoxDecoration(color: Colors.grey.withAlpha(60)),
+                  margin: EdgeInsets.symmetric(horizontal: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(60),
+                    image: DecorationImage(image: NetworkImage(photo)),
+                  ),
                   alignment: .center,
-                  child: Text('Image $i', style: TextStyle(fontSize: 16.0)),
                 );
               },
             );
           }).toList(),
         ),
-
         Positioned(
           bottom: 10,
-          left:0,
+          left: 0,
           right: 0,
           child: ValueListenableBuilder(
             valueListenable: _selectedIndex,
@@ -51,17 +53,14 @@ class _ProductImageCarosolState extends State<ProductImageCarosol> {
               return Row(
                 mainAxisAlignment: .center,
                 children: [
-                  for (int i = 0; i < 5; i++)
+                  for (int i = 0; i < widget.photos.length; i++)
                     Container(
                       width: 10,
                       height: 10,
-                      margin: .only(right: 3),
+                      margin: .only(right: 2),
                       decoration: BoxDecoration(
                         borderRadius: .circular(10),
-          
-                        color: i == index
-                            ? AppColors.themeColor
-                            : Colors.white,
+                        color: i == index ? AppColors.themeColor : Colors.white,
                       ),
                     ),
                 ],
@@ -72,5 +71,4 @@ class _ProductImageCarosolState extends State<ProductImageCarosol> {
       ],
     );
   }
-
 }
