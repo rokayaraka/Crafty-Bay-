@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/app_colors.dart';
 import '../../../../app/asset_paths.dart';
 import '../../../products/data/models/product_model.dart';
-import '../../../products/presentation/product_details_screen.dart';
+import '../../../products/presentation/screens/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.productModel});
@@ -13,25 +13,27 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = TextTheme.of(context);
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
           ProductDetailsScreen.name,
-          arguments:productModel.id,
+          arguments: productModel.id,
         );
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: .circular(8)),
         color: Colors.white,
         shadowColor: AppColors.themeColor.withAlpha(40),
-        elevation: 5,
+        elevation: 2,
         child: SizedBox(
           width: 150,
           child: Column(
             children: [
               Container(
-                width: 120,
+                width: 150,
                 height: 120,
                 decoration: BoxDecoration(
                   color: AppColors.themeColor.withAlpha(30),
@@ -40,28 +42,32 @@ class ProductCard extends StatelessWidget {
                     topRight: .circular(8),
                   ),
                 ),
-                child: Image.network(getProductPhoto(productModel.photos),
-                errorBuilder: (_,_,_)=>Image.asset(AssetPaths.dummyPng),
+                child: Image.network(
+                  getProductPhoto(productModel.photos),
+                  errorBuilder: (_, _, _) => Image.asset(AssetPaths.dummyPng),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: Column(
-                  spacing: 3,
+                  spacing: 4,
                   crossAxisAlignment: .start,
                   children: [
                     Text(
-                     productModel.title,
-                      style: TextStyle(fontWeight: .w900, color: Colors.black),
+                      productModel.title,
+                      style: TextStyle(
+                        fontWeight: .w600,
+                        color: Colors.black54,
+                      ),
                     ),
+
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Text(
                           '\$${productModel.price}',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: .w600,
+                          style: textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
                             color: AppColors.themeColor,
                           ),
                         ),
@@ -69,17 +75,17 @@ class ProductCard extends StatelessWidget {
                           spacing: 4,
                           children: [
                             Icon(Icons.star, color: Colors.amber, size: 18),
-                            Text('${productModel.rating}?? 0'),
+                            Text('${productModel.rating}'),
                           ],
                         ),
                         Container(
-                          padding: .all(4),
+                          padding: .all(2),
                           decoration: BoxDecoration(
                             borderRadius: .circular(4),
                             color: AppColors.themeColor,
                           ),
                           child: Icon(
-                            Icons.favorite_border_outlined,
+                            Icons.favorite_outline,
                             size: 18,
                             color: Colors.white,
                           ),
@@ -89,7 +95,6 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 4),
             ],
           ),
@@ -98,7 +103,6 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  //random placeholder image
   String getProductPhoto(List<String> photos) {
     if (photos.isEmpty) {
       return '';

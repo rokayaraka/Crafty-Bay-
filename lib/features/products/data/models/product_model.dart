@@ -1,3 +1,11 @@
+// {
+// "_id": "67c369ca5e8a445235de1b49",
+// "title": "Motorola Edge 50 Fusion",
+// "photos": [
+// "https://owp.klarna.com/product/232x232/3146103049/Motorola-Edge-50-Fusion-8GB-RAM-256GB.jpg?ph=true"
+// ],
+// "current_price": 12000,
+// }
 class ProductModel {
   final String id;
   final String title;
@@ -12,6 +20,7 @@ class ProductModel {
     required this.price,
     required this.rating,
   });
+
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {
     return ProductModel(
       id: jsonData['_id'],

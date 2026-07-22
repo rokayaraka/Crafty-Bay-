@@ -1,27 +1,28 @@
 import 'dart:convert';
+
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
-part  'network_response.dart';
-
-
+part 'network_response.dart';
 
 class NetworkCaller {
   final Logger _logger = Logger();
 
-  final  Map<String, String> Function() headers;
+  final Map<String, String> Function() headers;
 
   NetworkCaller({required this.headers});
 
-  ///GET///
+  // Get
   Future<NetWorkResponse> getRequest(String url) async {
     try {
       Uri uri = Uri.parse(url);
+
       _logRequest(url, headers: headers());
       final Response response = await get(uri, headers: headers());
       _logResponse(response);
+
       if (response.statusCode == 200) {
-        //sucess
+        // Success
         final decodedJson = jsonDecode(response.body);
         return NetWorkResponse(
           isSuccess: true,
@@ -29,15 +30,15 @@ class NetworkCaller {
           body: decodedJson,
         );
       } else {
-        //failed
+        // Failed
         // {
-        //   'massage':"something went wrong"
+        //   'message' : 'something went wrong'
         // }
         final decodedJson = jsonDecode(response.body);
         return NetWorkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          errorMsg: decodedJson['massage'] ?? 'something went wrong',
+          errorMsg: decodedJson['msg'] ?? 'Something went wrong!',
         );
       }
     } on Exception catch (e) {
@@ -48,13 +49,15 @@ class NetworkCaller {
       );
     }
   }
-  ///POST///
+
+  // Post
   Future<NetWorkResponse> postRequest(
-    String url,
+    String url, {
     Map<String, dynamic>? body,
-  ) async {
+  }) async {
     try {
       Uri uri = Uri.parse(url);
+
       _logRequest(url, requestBody: body, headers: headers());
       final Response response = await post(
         uri,
@@ -62,8 +65,9 @@ class NetworkCaller {
         body: jsonEncode(body),
       );
       _logResponse(response);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
-        //sucess
+        // Success
         final decodedJson = jsonDecode(response.body);
         return NetWorkResponse(
           isSuccess: true,
@@ -71,11 +75,15 @@ class NetworkCaller {
           body: decodedJson,
         );
       } else {
+        // Failed
+        // {
+        //   'message' : 'something went wrong'
+        // }
         final decodedJson = jsonDecode(response.body);
         return NetWorkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          errorMsg: decodedJson['msg'] ?? 'something went wrong',
+          errorMsg: decodedJson['msg'] ?? 'Something went wrong!',
         );
       }
     } on Exception catch (e) {
@@ -93,7 +101,7 @@ class NetworkCaller {
     Map<String, String>? headers,
   }) {
     _logger.d('''URL => $url
-    Headers=>$headers
+    Headers => $headers
     RequestBody => $requestBody
     ''');
   }
@@ -101,18 +109,14 @@ class NetworkCaller {
   void _logResponse(Response response) {
     if (response.statusCode == 200 || response.statusCode == 201) {
       _logger.i('''URL => ${response.request?.url}
-    Status Code=>${response.statusCode}
+    Status Code => ${response.statusCode}
     RequestBody => ${response.body}
     ''');
     } else {
       _logger.e('''URL => ${response.request?.url}
-    Status Code=>${response.statusCode}
+    Status Code => ${response.statusCode}
     RequestBody => ${response.body}
     ''');
     }
   }
-
-
 }
-
-
