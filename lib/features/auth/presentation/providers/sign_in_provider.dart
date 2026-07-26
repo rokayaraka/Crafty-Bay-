@@ -1,5 +1,6 @@
-import 'package:crafty_bay/app/get_network_caller.dart';
+
 import 'package:flutter/material.dart';
+import '../../../../app/get_network_caller.dart';
 import '../../../../app/providers/auth_controller.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
@@ -20,6 +21,7 @@ class SignInProvider extends ChangeNotifier {
     final NetWorkResponse response = await getNetworkCaller().postRequest(
       Urls.signInUrl,
      body:  params.toJson(),
+     isFormLogin: true,
     );
     if (response.isSuccess) {
       isSuccess = true;

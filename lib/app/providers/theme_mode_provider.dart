@@ -27,12 +27,12 @@ class ThemeModeProvider extends ChangeNotifier {
 
   ThemeMode _parseThemeMode(String themeMode) {
     switch (themeMode) {
-      case 'light':
-        return .light;
+      case 'system':
+        return .system;
       case 'dark':
         return .dark;
       default:
-        return .system;
+        return .light;
     }
   }
 }

@@ -1,7 +1,8 @@
-import 'package:crafty_bay/features/shared/presentation/presentation/main_nav_holder_screen.dart';
+
 import 'package:flutter/material.dart';
 import '../../../../app/providers/auth_controller.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../shared/presentation/presentation/main_nav_holder_screen.dart';
 import '../../../shared/presentation/widgets/theme_toggle.dart';
 import '../widgets/appLogo.dart';
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
@@ -10,7 +11,9 @@ class NetworkCaller {
 
   final Map<String, String> Function() headers;
 
-  NetworkCaller({required this.headers});
+  final VoidCallback onUnauthorized;
+
+  NetworkCaller({required this.headers, required this.onUnauthorized});
 
   // Get
   Future<NetWorkResponse> getRequest(String url) async {
@@ -28,6 +31,14 @@ class NetworkCaller {
           isSuccess: true,
           statusCode: response.statusCode,
           body: decodedJson,
+        );
+      } else if (response.statusCode == 401) {
+        //Unauthorized
+        onUnauthorized();
+        return NetWorkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMsg: 'Unauthorized',
         );
       } else {
         // Failed
@@ -54,6 +65,7 @@ class NetworkCaller {
   Future<NetWorkResponse> postRequest(
     String url, {
     Map<String, dynamic>? body,
+    bool isFormLogin = false,
   }) async {
     try {
       Uri uri = Uri.parse(url);
@@ -73,6 +85,15 @@ class NetworkCaller {
           isSuccess: true,
           statusCode: response.statusCode,
           body: decodedJson,
+        );
+      } else if (response.statusCode == 401 && isFormLogin==false) {
+        //Unauthorized
+        
+        onUnauthorized();
+        return NetWorkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMsg: 'Unauthorized',
         );
       } else {
         // Failed

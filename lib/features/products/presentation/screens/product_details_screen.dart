@@ -7,15 +7,14 @@ import '../../../../app/providers/auth_controller.dart';
 import '../../../auth/presentation/screens/sign_in_screen.dart';
 import '../../../carts/data/models/add_to_cart_params.dart';
 import '../../../carts/presentation/providers/add_to_cart_provider.dart';
+import '../../../review/presentation/screens/review_screen.dart';
 import '../../../shared/presentation/widgets/centered_progress_indicator.dart';
 import '../../../shared/presentation/widgets/inc_dec_button.dart';
 import '../../../shared/presentation/widgets/snack_bar_message.dart';
 import '../providers/product_details_provider.dart';
 import '../widgets/color_picker.dart';
-
 import '../widgets/price_and_add_to_cart_section.dart';
 import '../widgets/product_image_carosol.dart';
-
 import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -114,7 +113,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ],
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ReviewScreen(),
+                                        ),
+                                      );
+                                    },
                                     child: Text('Reviews'),
                                   ),
                                   Container(
