@@ -23,6 +23,6 @@ class Urls {
       '$_baseUrl/cart/$cartItemId';
   static String reviewUrl(String productId) =>
       '$_baseUrl/review?product=$productId';
-  static String reviewListUrl(String productId, {int count = 2}) =>
+  static String reviewListUrl(String productId, {int count = 5}) =>
       '$_baseUrl/reviews?product=$productId&count=$count';
 }

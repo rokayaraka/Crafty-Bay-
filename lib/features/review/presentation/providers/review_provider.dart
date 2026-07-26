@@ -79,7 +79,7 @@ class ReviewProvider extends ChangeNotifier {
     notifyListeners();
 
     final NetWorkResponse response = await getNetworkCaller().postRequest(
-      Urls.reviewUrl(productId),
+      Urls.reviewUrl(productId,),
       body: {'comment': comment, 'product': productId, 'rating': rating},
     );
 
