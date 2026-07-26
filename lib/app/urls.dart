@@ -21,4 +21,7 @@ class Urls {
   static const String cartListUrl = '$_baseUrl/cart';
   static const String addToCartUrl = '$_baseUrl/cart';
   static String cartDeleteUrl(String cartItemId) => '$_baseUrl/cart/$cartItemId';
+    static String reviewUrl(String productId) => '$_baseUrl/review?product=$productId';
+  static String reviewListUrl(String productId, {int count = 2}) =>
+      '$_baseUrl/reviews?product=$productId&count=$count';
 }

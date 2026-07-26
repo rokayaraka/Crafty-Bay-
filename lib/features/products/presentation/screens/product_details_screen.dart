@@ -117,7 +117,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => ReviewScreen(),
+                                          builder: (context) => ReviewScreen(
+                                            productId: widget.productId,
+                                          ),
                                         ),
                                       );
                                     },

@@ -1,11 +1,15 @@
 
 import 'package:flutter/material.dart';
+
+
 import '../../../../app/app_colors.dart';
 import '../screens/add_review_screen.dart';
 
 
 class AddReviewSection extends StatelessWidget {
-  const AddReviewSection({super.key});
+  const AddReviewSection({super.key, required this.productId});
+
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,9 @@ class AddReviewSection extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddReviewScreen()),
+                MaterialPageRoute(
+                  builder: (context) => AddReviewScreen(productId: productId),
+                ),
               );
             },
             child: Container(
