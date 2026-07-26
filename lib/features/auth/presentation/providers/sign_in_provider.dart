@@ -28,7 +28,6 @@ class SignInProvider extends ChangeNotifier {
       _errorMessage = null;
       String token = response.body['data']['token'];
        UserModel userModel = UserModel.fromJson(response.body['data']['user']);
-      //TODO: save token and user data in shared preferences
       await AuthController.saveUserData(token, userModel);
       
 

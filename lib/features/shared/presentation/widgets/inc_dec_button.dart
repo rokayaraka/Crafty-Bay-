@@ -31,7 +31,8 @@ class _IncDecButtonState extends State<IncDecButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: .spaceBetween,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _iconButton(Icons.remove, () {
           if (_counter > widget.minCount) {
@@ -57,12 +58,12 @@ class _IncDecButtonState extends State<IncDecButton> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: .all(4),
+        padding: const EdgeInsets.all(3),
         decoration: BoxDecoration(
           color: disable ? Colors.grey : AppColors.themeColor,
-          borderRadius: .circular(4),
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
         ),
-        child: Icon(icon, color: Colors.white, size: 20),
+        child: Icon(icon, color: Colors.white, size: 18),
       ),
     );
   }

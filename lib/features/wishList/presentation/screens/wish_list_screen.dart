@@ -10,7 +10,7 @@ import '../providers/wishlist_provider.dart';
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
 
-  static const String name = '/wish-list-screen';
+  static const String name = '/wishlistscreen';
 
   @override
   State<WishListScreen> createState() => _WishListScreenState();
@@ -53,8 +53,9 @@ class _WishListScreenState extends State<WishListScreen> {
                 children: [
                   Expanded(
                     child: GridView.builder(
-                      itemCount: 9,
-                      padding: const EdgeInsets.all(8),
+                      controller: _scrollController,
+                      itemCount: wishListProvider.productList.length,
+             
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 10,
@@ -89,6 +90,8 @@ class _WishListScreenState extends State<WishListScreen> {
                       },
                     ),
                   ),
+                  if(wishListProvider.isLoadingMore)
+                  const LinearProgressIndicator(),
                 ],
               );
             }

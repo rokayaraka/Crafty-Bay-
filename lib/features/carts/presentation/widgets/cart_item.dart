@@ -16,81 +16,90 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Image.asset(AssetPaths.dummyPng, width: 100),
           ),
-          Column(
-            spacing: 8,
-            crossAxisAlignment: .start,
-            mainAxisAlignment: .start,
-            children: [
-              Row(
-                spacing: 50,
-                mainAxisAlignment: .spaceBetween,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                spacing: 8,
+
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      Text(
-                        cartItemModel.product.title,
-                        style: TextStyle(fontSize: 18, fontWeight: .w700),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              cartItemModel.product.title,
+
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+
+                            Text(
+                              'Color: ${cartItemModel.color ?? ''}   Size: ${cartItemModel.size ?? ''}',
+                            ),
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Text('Color: ${cartItemModel.color ?? ''}'),
-                          SizedBox(width: 10),
-                          Text('Size: ${cartItemModel.size ?? ''}'),
-                        ],
+
+                      IconButton(
+                        onPressed: () {
+                          context.read<CartListProvider>().removeItem(
+                            cartItemModel,
+                          );
+                        },
+                        icon: Icon(Icons.delete_outline),
                       ),
                     ],
                   ),
 
-                  IconButton(
-                    onPressed: _onTapIncDecButton,
-                    icon: Icon(Icons.delete_outline),
-                  ),
-                ],
-              ),
+                  Row(
+                    mainAxisAlignment: .spaceBetween,
+                    children: [
+                      Text(
+                        '${Constants.takaSign} 100',
+                        style: TextStyle(
+                          fontWeight: .w700,
+                          color: AppColors.themeColor,
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(width: 70),
 
-              Row(
-                mainAxisAlignment: .spaceBetween,
-                children: [
-                  Text(
-                    '${Constants.takaSign} 100',
-                    style: TextStyle(
-                      fontWeight: .w700,
-                      color: AppColors.themeColor,
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(width: 70),
-                  SizedBox(
-                    width: 100,
-                    child: IncDecButton(
-                      maxCount: cartItemModel.product.quantity,
-                      minCount: 1,
-                      initialValue: cartItemModel.quantity,
-                      onChange: (int newValue) {
-                        context.read<CartListProvider>().updateCartItemQuantity(
-                          cartItemModel.id,
-                          newValue,
-                        );
-                      },
-                    ),
+                      SizedBox(
+                        width: 100,
+                        child: IncDecButton(
+                          maxCount: cartItemModel.product.quantity,
+                          minCount: 1,
+                          initialValue: cartItemModel.quantity,
+                          onChange: (int newValue) {
+                            context
+                                .read<CartListProvider>()
+                                .updateCartItemQuantity(
+                                  cartItemModel.id,
+                                  newValue,
+                                );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ],
       ),
     );
-  }
-
-  void _onTapIncDecButton() {
-    //TODO : implement delete cart api
   }
 }

@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import '../../../../app/app_colors.dart';
+import '../../../shared/presentation/presentation/main_nav_holder_screen.dart';
 import '../../../shared/presentation/widgets/centered_progress_indicator.dart';
 import '../../../shared/presentation/widgets/snack_bar_message.dart';
 import '../../data/models/verify_otp_params.dart';
@@ -132,6 +134,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
 
     if (isSuccess) {
       // Navigate to the next screen or show success message
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainNavHolderScreen.name,
+        (predicate) => false,
+      );
     } else {
       // Show error message
 
