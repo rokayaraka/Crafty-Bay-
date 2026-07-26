@@ -9,7 +9,7 @@ import '../../../../core/service/network_caller/network_caller.dart';
 import '../../data/models/review_model.dart';
 
 class ReviewProvider extends ChangeNotifier {
-final  List<ReviewModel> _reviewList = [];
+  final List<ReviewModel> _reviewList = [];
 
   List<ReviewModel> get reviewList => _reviewList;
 
@@ -84,6 +84,7 @@ final  List<ReviewModel> _reviewList = [];
     );
 
     if (response.isSuccess) {
+      await getReviewList(productId);
       _isAdding = false;
       notifyListeners();
       return true;

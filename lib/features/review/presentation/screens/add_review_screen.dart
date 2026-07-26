@@ -134,7 +134,8 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
     );
 
     if (isSuccess) {
-      Navigator.pop(context);
+    
+      Navigator.pop(context,true);
       showSnackBarMessage(context, 'Review submitted successfully');
       return;
     }

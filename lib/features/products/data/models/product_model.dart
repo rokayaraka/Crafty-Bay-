@@ -27,9 +27,9 @@ class ProductModel {
       id: jsonData['_id'],
       title: jsonData['title'],
       photos: List.from(jsonData['photos']),
-      price: jsonData['current_price'],
+      price: jsonData['current_price']??0,
       rating: 4.0,
-      quantity: jsonData['quantity'],
+      quantity: jsonData['quantity']??0,
     );
   }
 }

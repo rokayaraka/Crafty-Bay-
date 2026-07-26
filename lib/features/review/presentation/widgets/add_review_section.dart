@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../providers/review_provider.dart';
 import '../screens/add_review_screen.dart';
-
 
 class AddReviewSection extends StatelessWidget {
   const AddReviewSection({super.key, required this.productId});
@@ -30,17 +29,25 @@ class AddReviewSection extends StatelessWidget {
                 'Reviews',
                 style: TextStyle(fontWeight: .bold, fontSize: 16),
               ),
-              Text('(1000)', style: TextStyle(fontWeight: .w600, fontSize: 16)),
+              Consumer<ReviewProvider>(
+                builder: (_, reviewProvider, __) {
+                  return Text('(${reviewProvider.reviewList.length})');
+                },
+              ),
             ],
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
+            onTap: () async {
+              final bool? isAdded = await Navigator.push<bool>(
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddReviewScreen(productId: productId),
                 ),
               );
+
+              if (isAdded == true && context.mounted) {
+                await context.read<ReviewProvider>().getReviewList(productId);
+              }
             },
             child: Container(
               height: 40,

@@ -5,7 +5,7 @@ class ReviewModel {
   final String id;
   final ProductModel product;
   final UserModel user;
-  final int rating;
+  final double rating;
   final String comment;
   final DateTime createdAt;
   final DateTime updatedAt;
