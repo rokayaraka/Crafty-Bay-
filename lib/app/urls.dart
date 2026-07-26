@@ -8,6 +8,7 @@ class Urls {
 
     static const String cartUrl = '$_baseUrl/cart';
 
+
   static String categoryListUrl(int pageNo, int count) =>
       '$_baseUrl/categories?count=$count&page=$pageNo';
   static String productListUrl(int pageNo, int count) =>
@@ -16,4 +17,7 @@ class Urls {
       '$_baseUrl/products/id/$productId';
        static String wishlistUrl(int currentPage, int productsPerPage) =>
       '$_baseUrl/wishlist?count=$productsPerPage&page=$currentPage';
+
+      static const String cartListUrl = '$_baseUrl/cart';
+      static const String addToCartUrl = '$_baseUrl/cart';
 }

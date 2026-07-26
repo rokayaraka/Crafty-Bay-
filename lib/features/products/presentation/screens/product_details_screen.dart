@@ -82,7 +82,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       productModel.title,
                                       style: textTheme.titleMedium?.copyWith(
                                         fontSize: 18,
-                                        color: Colors.black54,
+                                       
                                       ),
                                     ),
                                   ),
@@ -176,7 +176,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                               Text(
                                 productModel.description,
-                                style: TextStyle(color: Colors.black54),
+                                
                               ),
                             ],
                           ),
