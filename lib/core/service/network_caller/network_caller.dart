@@ -116,6 +116,7 @@ class NetworkCaller {
     }
   }
 
+
   void _logRequest(
     String url, {
     Map<String, dynamic>? requestBody,
@@ -140,4 +141,46 @@ class NetworkCaller {
     ''');
     }
   }
+
+
+    // Delete
+  Future<NetWorkResponse> deleteRequest(String url) async {
+    try {
+      Uri uri = Uri.parse(url);
+
+      _logRequest(url, headers: headers());
+      final Response response = await delete(uri, headers: headers());
+      _logResponse(response);
+
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 204) {
+        return NetWorkResponse(
+          isSuccess: true,
+          statusCode: response.statusCode,
+        );
+      } else if (response.statusCode == 401) {
+        onUnauthorized();
+        return NetWorkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMsg: 'Unauthorized',
+        );
+      } else {
+        final decodedJson = response.body.isNotEmpty ? jsonDecode(response.body) : null;
+        return NetWorkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMsg: decodedJson?['msg'] ?? 'Something went wrong!',
+        );
+      }
+    } on Exception catch (e) {
+      return NetWorkResponse(
+        isSuccess: false,
+        statusCode: -1,
+        errorMsg: e.toString(),
+      );
+    }
+  }
+
 }

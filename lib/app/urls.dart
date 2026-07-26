@@ -6,7 +6,7 @@ class Urls {
 
   static const String getSlidersUrl = '$_baseUrl/slides';
 
-    static const String cartUrl = '$_baseUrl/cart';
+  static const String cartUrl = '$_baseUrl/cart';
 
 
   static String categoryListUrl(int pageNo, int count) =>
@@ -15,9 +15,10 @@ class Urls {
       '$_baseUrl/products?count=$count&page=$pageNo';
     static String productDetailsUrl(String productId) =>
       '$_baseUrl/products/id/$productId';
-       static String wishlistUrl(int currentPage, int productsPerPage) =>
+  static String wishlistUrl(int currentPage, int productsPerPage) =>
       '$_baseUrl/wishlist?count=$productsPerPage&page=$currentPage';
 
-      static const String cartListUrl = '$_baseUrl/cart';
-      static const String addToCartUrl = '$_baseUrl/cart';
+  static const String cartListUrl = '$_baseUrl/cart';
+  static const String addToCartUrl = '$_baseUrl/cart';
+  static String cartDeleteUrl(String cartItemId) => '$_baseUrl/cart/$cartItemId';
 }

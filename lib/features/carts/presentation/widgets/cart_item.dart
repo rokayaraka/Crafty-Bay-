@@ -53,8 +53,8 @@ class CartItem extends StatelessWidget {
                       ),
 
                       IconButton(
-                        onPressed: () {
-                          context.read<CartListProvider>().removeItem(
+                        onPressed: () async {
+                          await context.read<CartListProvider>().removeItem(
                             cartItemModel,
                           );
                         },

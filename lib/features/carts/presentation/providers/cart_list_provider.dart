@@ -17,6 +17,9 @@ class CartListProvider extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
+  bool _isDeleting = false;
+  bool get isDeleting => _isDeleting;
+
   Future<bool> getCartList() async {
     bool isSuccess = false;
     _isLoading = true;
@@ -56,13 +59,26 @@ class CartListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addItem(CartModel item) {
-    _cartItems.add(item);
-    notifyListeners();
-  }
 
-  void removeItem(CartModel item) {
-    _cartItems.remove(item);
+  Future<bool> removeItem(CartModel item) async {
+    _isDeleting = true;
     notifyListeners();
+
+    final NetWorkResponse response = await getNetworkCaller().deleteRequest(
+      Urls.cartDeleteUrl(item.id),
+    );
+
+    if (response.isSuccess) {
+      _cartItems.removeWhere((CartModel cartItem) => cartItem.id == item.id);
+      _errorMessage = null;
+      _isDeleting = false;
+      notifyListeners();
+      return true;
+    }
+
+    _errorMessage = response.errorMsg;
+    _isDeleting = false;
+    notifyListeners();
+    return false;
   }
 }
