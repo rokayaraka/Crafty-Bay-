@@ -1,14 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import '../../../../app/get_network_caller.dart';
-import '../../../../app/providers/auth_controller.dart';
+
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
-import '../../../auth/data/models/user_model.dart';
+
 import '../../data/models/review_model.dart';
 
 class ReviewProvider extends ChangeNotifier {
-  final List<ReviewModel> _reviewList = [];
+final  List<ReviewModel> _reviewList = [];
 
   List<ReviewModel> get reviewList => _reviewList;
 
@@ -31,13 +32,30 @@ class ReviewProvider extends ChangeNotifier {
 
     if (response.isSuccess) {
       final List<dynamic> results = response.body['data']['results'];
-      _reviewList
-        
-        .addAll(
-          results
-              .map<ReviewModel>((item) => ReviewModel.fromJson(item))
-              .toList(),
-        );
+      log('Review List: $results');
+      // _reviewList
+      // ..clear()
+      // ..addAll(
+      //   results.map<ReviewModel>((item) => ReviewModel.fromJson(item)).toList(),
+      // );
+      _reviewList.clear();
+
+      for (final item in results) {
+        try {
+          _reviewList.add(ReviewModel.fromJson(item));
+        } catch (e) {
+          debugPrint('Failed to parse: $item');
+          debugPrint(e.toString());
+        }
+      }
+
+      // _reviewList = results.map((item) => ReviewModel.fromJson(item)).toList();
+      // try {
+      //   _reviewList =_reviewList..addAll( results.map((e) => ReviewModel.fromJson(e)).toList());
+      // } catch (e, s) {
+      //   debugPrint(e.toString());
+      //   debugPrintStack(stackTrace: s);
+      // }
       _errorMessage = null;
       _isLoading = false;
       notifyListeners();
@@ -55,19 +73,17 @@ class ReviewProvider extends ChangeNotifier {
     required String firstName,
     required String lastName,
     required String comment,
+    required String rating,
   }) async {
     _isAdding = true;
     notifyListeners();
 
     final NetWorkResponse response = await getNetworkCaller().postRequest(
       Urls.reviewUrl(productId),
-      body: {'comment': comment, 'firstName': firstName, 'lastName': lastName},
+      body: {'comment': comment, 'product': productId, 'rating': rating},
     );
 
     if (response.isSuccess) {
-      String token = response.body['data']['token'];
-      UserModel userModel = UserModel.fromJson(response.body['data']['user']);
-      await AuthController.saveUserData(token, userModel);
       _isAdding = false;
       notifyListeners();
       return true;

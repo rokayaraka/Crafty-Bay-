@@ -1,33 +1,34 @@
+import '../../../auth/data/models/user_model.dart';
 import '../../../products/data/models/product_model.dart';
 
 class ReviewModel {
   final String id;
-
   final ProductModel product;
-
-  final String userName;
+  final UserModel user;
+  final int rating;
   final String comment;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   ReviewModel({
     required this.id,
-
-    required this.userName,
-    required this.comment,
     required this.product,
+    required this.user,
+    required this.rating,
+    required this.comment,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
-    final user = (json['user'] as Map<String, dynamic>?);
-
-    final firstName = (user?['first_name']).toString();
-    final lastName = (user?['last_name']).toString();
-    final fullName = '$firstName $lastName'.trim();
-
     return ReviewModel(
-      id: (json['_id']).toString(),
-      userName: fullName,
-      comment: json['comment'],
-      product: ProductModel.fromJson(json['product']),
+      id: json['_id'] ,
+      product:  ProductModel.fromJson(json['product']) ,
+      user: UserModel.fromJson(json['user']),
+      rating: json['rating'],
+      comment: json['comment'] ,
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
 }

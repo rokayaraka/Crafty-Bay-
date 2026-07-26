@@ -18,7 +18,8 @@ class ProductModel {
     required this.title,
     required this.photos,
     required this.price,
-    required this.rating, required this.quantity,
+    required this.rating,
+    required this.quantity,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {
@@ -28,7 +29,7 @@ class ProductModel {
       photos: List.from(jsonData['photos']),
       price: jsonData['current_price'],
       rating: 4.0,
-      quantity: jsonData['quantity'] ,
+      quantity: jsonData['quantity'],
     );
   }
 }

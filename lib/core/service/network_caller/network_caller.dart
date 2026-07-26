@@ -86,9 +86,9 @@ class NetworkCaller {
           statusCode: response.statusCode,
           body: decodedJson,
         );
-      } else if (response.statusCode == 401 && isFormLogin==false) {
+      } else if (response.statusCode == 401 && isFormLogin == false) {
         //Unauthorized
-        
+
         onUnauthorized();
         return NetWorkResponse(
           isSuccess: false,
@@ -116,7 +116,6 @@ class NetworkCaller {
     }
   }
 
-
   void _logRequest(
     String url, {
     Map<String, dynamic>? requestBody,
@@ -142,8 +141,7 @@ class NetworkCaller {
     }
   }
 
-
-    // Delete
+  // Delete
   Future<NetWorkResponse> deleteRequest(String url) async {
     try {
       Uri uri = Uri.parse(url);
@@ -167,7 +165,9 @@ class NetworkCaller {
           errorMsg: 'Unauthorized',
         );
       } else {
-        final decodedJson = response.body.isNotEmpty ? jsonDecode(response.body) : null;
+        final decodedJson = response.body.isNotEmpty
+            ? jsonDecode(response.body)
+            : null;
         return NetWorkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
@@ -182,5 +182,4 @@ class NetworkCaller {
       );
     }
   }
-
 }

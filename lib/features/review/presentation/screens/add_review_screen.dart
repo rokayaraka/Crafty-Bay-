@@ -19,6 +19,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
+  final TextEditingController _ratingController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
@@ -71,6 +72,13 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                     ),
                   ),
                   TextFormField(
+                    controller: _ratingController,
+                    decoration: const InputDecoration(
+                      labelText: 'Rating',
+                      labelStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  TextFormField(
                     controller: _commentController,
                     maxLines: 10,
                     decoration: const InputDecoration(
@@ -110,28 +118,31 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
     final firstName = _firstNameController.text.trim();
     final lastName = _lastNameController.text.trim();
     final comment = _commentController.text.trim();
+    final rating = _ratingController.text.trim();
 
-    if (firstName.isEmpty || lastName.isEmpty || comment.isEmpty) {
+    if (firstName.isEmpty || lastName.isEmpty || comment.isEmpty || rating.isEmpty) {
       showSnackBarMessage(context, 'Please fill all review fields');
       return;
     }
 
     final isSuccess = await _reviewProvider.addReview(
       productId: widget.productId,
-       firstName: firstName,
+      firstName: firstName,
       lastName: lastName,
       comment: comment,
+      rating: rating,
     );
 
     if (isSuccess) {
-      
-      
       Navigator.pop(context);
       showSnackBarMessage(context, 'Review submitted successfully');
       return;
     }
 
     if (!mounted) return;
-    showSnackBarMessage(context, _reviewProvider.errorMessage ?? 'Something went wrong!');
+    showSnackBarMessage(
+      context,
+      _reviewProvider.errorMessage ?? 'Something went wrong!',
+    );
   }
 }

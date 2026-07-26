@@ -26,7 +26,7 @@ class ReviewCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        reviewModel.userName,
+                        reviewModel.user.firstName,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -34,6 +34,12 @@ class ReviewCard extends StatelessWidget {
                       ),
                       Text(
                         reviewModel.product.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                         Text(
+                        reviewModel.rating.toString(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 12),
