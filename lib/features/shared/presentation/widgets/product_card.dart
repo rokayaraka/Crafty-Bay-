@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/asset_paths.dart';
-
 import '../../../products/presentation/screens/product_details_screen.dart';
 import 'product_model.dart';
 
