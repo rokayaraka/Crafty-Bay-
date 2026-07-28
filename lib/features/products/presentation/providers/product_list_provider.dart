@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 import '../../../../app/get_network_caller.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
-import '../../data/models/product_model.dart';
+import '../../../shared/presentation/widgets/product_model.dart';
+
 
 class ProductListProvider extends ChangeNotifier {
   final int _productsPerPage = 32;

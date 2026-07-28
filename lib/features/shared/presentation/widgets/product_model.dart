@@ -19,7 +19,7 @@ class ProductModel {
     required this.photos,
     required this.price,
     required this.rating,
-    required this.quantity,
+    required this.quantity, 
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {

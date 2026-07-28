@@ -1,5 +1,7 @@
 
-import '../../../products/data/models/product_model.dart';
+
+
+import '../../../shared/presentation/widgets/product_model.dart';
 
 class WishlistModel {
   final String cartId;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
-import '../../../../app/asset_paths.dart';
+
+import 'product_model.dart';
 
 class NewCard extends StatelessWidget {
-  const NewCard({super.key});
+  const NewCard({super.key, required this.newProduct});
+  final ProductModel newProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class NewCard extends StatelessWidget {
                   topRight: .circular(8),
                 ),
               ),
-              child: Image.asset(AssetPaths.dummyPng),
+              child: Image.network(newProduct.photos[0], fit: BoxFit.cover),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -36,14 +38,14 @@ class NewCard extends StatelessWidget {
                 crossAxisAlignment: .start,
                 children: [
                   Text(
-                    'Title of pruduct',
+                    newProduct.title,
                     style: TextStyle(fontWeight: .w900, color: Colors.black),
                   ),
                   Row(
                     mainAxisAlignment: .spaceBetween,
                     children: [
                       Text(
-                        '\$100',
+                        '\$${newProduct.price}',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: .w600,
@@ -54,7 +56,9 @@ class NewCard extends StatelessWidget {
                         spacing: 4,
                         children: [
                           Icon(Icons.star, color: Colors.amber, size: 18),
-                          Text('4.5'),
+                          Text('${newProduct.rating}',
+                           style: TextStyle( color: Colors.black),
+                          ),
                         ],
                       ),
                       Container(

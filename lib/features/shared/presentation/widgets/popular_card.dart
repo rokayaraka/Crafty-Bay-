@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
-import '../../../../app/asset_paths.dart';
+
 import 'product_model.dart';
 
-class SpecialCard extends StatelessWidget {
-  const SpecialCard({super.key, required this.specialProduct});
-  final ProductModel specialProduct;
-
+class PopularCard extends StatelessWidget {
+  const PopularCard({super.key, required this.popularProduct});
+final ProductModel popularProduct;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,7 +28,7 @@ class SpecialCard extends StatelessWidget {
                   topRight: .circular(8),
                 ),
               ),
-              child: Image.network(specialProduct.photos[0], fit: BoxFit.cover),
+              child: Image.network(popularProduct.photos[0], fit: BoxFit.cover,),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -38,14 +37,14 @@ class SpecialCard extends StatelessWidget {
                 crossAxisAlignment: .start,
                 children: [
                   Text(
-                    specialProduct.title,
+                    popularProduct.title,
                     style: TextStyle(fontWeight: .w900, color: Colors.black),
                   ),
                   Row(
                     mainAxisAlignment: .spaceBetween,
                     children: [
                       Text(
-                        '\$${specialProduct.price}',
+                        '\$${popularProduct.price}',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: .w600,
@@ -56,9 +55,9 @@ class SpecialCard extends StatelessWidget {
                         spacing: 4,
                         children: [
                           Icon(Icons.star, color: Colors.amber, size: 18),
-                          Text('${specialProduct.rating}',
-                          style: TextStyle( color: Colors.black),
-                          ),
+                          Text('${popularProduct.rating}',
+                          style: TextStyle( color: Colors.black),),
+                          
                         ],
                       ),
                       Container(

@@ -1,10 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/Dummy data/dummy_product.dart';
 import '../../../shared/presentation/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/presentation/widgets/centered_progress_indicator.dart';
 import '../../../shared/presentation/widgets/new_card.dart';
-import '../../../shared/presentation/widgets/product_card.dart';
+
+import '../../../shared/presentation/widgets/popular_card.dart';
 import '../../../shared/presentation/widgets/special_card.dart';
 import '../providers/home_sliders_provider.dart';
 import '../widgets/home_app_bar.dart';
@@ -61,9 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SingleChildScrollView(
                 scrollDirection: .horizontal,
-                // child: Row(
-                //  children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
-                // ),
+                child: Row(
+                  children: [1, 2, 3, 4, 5]
+                      .map(
+                        (e) => PopularCard(
+                          popularProduct: DummyProduct.dummyProducts[e - 1],
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
               SectionHeader(
                 headerText: 'Special',
@@ -74,7 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 scrollDirection: .horizontal,
                 child: Row(
-                  children: [1, 2, 3, 4, 5].map((e) => SpecialCard()).toList(),
+                  children: [1, 2, 3, 4, 5]
+                      .map(
+                        (e) => SpecialCard(
+                          specialProduct: DummyProduct.dummyProducts[e - 1],
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
 
@@ -87,7 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 scrollDirection: .horizontal,
                 child: Row(
-                  children: [1, 2, 3, 4, 5].map((e) => NewCard()).toList(),
+                  children: [1, 2, 3, 4, 5]
+                      .map(
+                        (e) => NewCard(
+                          newProduct: DummyProduct.dummyProducts[e - 1],
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ],

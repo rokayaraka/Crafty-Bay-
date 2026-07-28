@@ -1,5 +1,5 @@
 import '../../../auth/data/models/user_model.dart';
-import '../../../products/data/models/product_model.dart';
+import '../../../shared/presentation/widgets/product_model.dart';
 
 class ReviewModel {
   final String id;

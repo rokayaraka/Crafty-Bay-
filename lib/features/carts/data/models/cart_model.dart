@@ -1,7 +1,8 @@
 
 
 
-import '../../../products/data/models/product_model.dart';
+
+import '../../../shared/presentation/widgets/product_model.dart';
 
 class CartModel {
   final String id;
